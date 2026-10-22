@@ -62,7 +62,18 @@ static void MX_TIM4_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+static uint32_t PWM_CompareFromPercent(TIM_HandleTypeDef *htim,
+                                       uint32_t duty_percent)
+{
+    uint32_t period = __HAL_TIM_GET_AUTORELOAD(htim);
 
+    if (duty_percent > 100U)
+    {
+        duty_percent = 100U;
+    }
+
+    return (period * duty_percent) / 100U;
+}
 /* USER CODE END 0 */
 
 /**
@@ -113,50 +124,88 @@ HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
 /* PB0 - TIM3 Channel 3 */
 HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);
 
+/* PB1 - TIM3 Channel 4 */
+HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_4);
+
 /* PE9 - TIM1 Channel 1 */
 HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 
-/* USER CODE END 2 */
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
+// /* USER CODE END 2 */
+//   /* Infinite loop */
+//   /* USER CODE BEGIN WHILE */
   while (1)
   {
   
-    //  Turn LEDs ON sequentially : PA0 to PA7
-    // for (uint16_t pin = GPIO_PIN_0; pin <= GPIO_PIN_7; pin <<= 1) 
-    // {
-    //     HAL_GPIO_WritePin(GPIOA, pin, GPIO_PIN_SET);
-    //     HAL_Delay(200);
-    // }
+//     //  ### Turn LEDs ON sequentially : PA0 to PA7 ###
+// ==================================================================================
+//     // for (uint16_t pin = GPIO_PIN_0; pin <= GPIO_PIN_7; pin <<= 1) 
+//     // {
+//     //     HAL_GPIO_WritePin(GPIOA, pin, GPIO_PIN_SET);
+//     //     HAL_Delay(200);
+//     // }
 
-    // /* Turn LEDs off sequentially: PA0 to PA7 */
-    // for (uint16_t pin = GPIO_PIN_0; pin <= GPIO_PIN_7; pin <<= 1)
-    // {
-    //     HAL_GPIO_WritePin(GPIOA, pin, GPIO_PIN_RESET);
-    //     HAL_Delay(200);
-    // }
-
+//     // /* Turn LEDs off sequentially: PA0 to PA7 */
+//     // for (uint16_t pin = GPIO_PIN_0; pin <= GPIO_PIN_7; pin <<= 1)
+//     // {
+//     //     HAL_GPIO_WritePin(GPIOA, pin, GPIO_PIN_RESET);
+//     //     HAL_Delay(200);
+//     // }
+// ------------===========================-------------------------------------------
     // ### ALTERNATIVE METHOD : TogglePin syntax
-    // for (uint16_t pin = GPIO_PIN_7; pin >= GPIO_PIN_0; pin >>= 1)
-    // {
-    //     HAL_GPIO_TogglePin(GPIOA, pin);
-    //     HAL_Delay(200);
-    // }
+    for (uint16_t pin = GPIO_PIN_7; pin >= GPIO_PIN_0; pin >>= 1)
+    {
+        HAL_GPIO_TogglePin(GPIOA, pin);
+        HAL_Delay(200);
+    }
 
-    //### SIMULTANEOUS ON AND OFF 
+//     //### SIMULTANEOUS ON AND OFF 
     // HAL_GPIO_TogglePin(GPIOA, 0x0FF); // 0X0FF : 8'b xxxx xxxx ( 2^8 )
     // HAL_Delay (50);
 
-    // ==================================================================================
+//     // ==================================================================================
 
     
 
 
-  }
+//   }
 }
-  /*USER CODE END WHILE*/
+//   /*USER CODE END WHILE*/
+// =======================================================================================
+/* USER CODE BEGIN WHILE */
 
 
+// ======================| PWM DUTY CYCLE * TOTAL VAL |===============================
+// while (1)
+// {
+//     /* PB0 / TIM3_CH3: 25% */
+//     __HAL_TIM_SET_COMPARE(&htim3,
+//                           TIM_CHANNEL_3,
+//                           PWM_CompareFromPercent(&htim3, 25U));
+
+//     /* PB1 / TIM3_CH4: 75% */
+//     __HAL_TIM_SET_COMPARE(&htim3,
+//                           TIM_CHANNEL_4,
+//                           PWM_CompareFromPercent(&htim3, 75U));
+
+//     HAL_Delay(1000);
+
+//     /* PB0 / TIM3_CH3: 75% */
+//     __HAL_TIM_SET_COMPARE(&htim3,
+//                           TIM_CHANNEL_3,
+//                           PWM_CompareFromPercent(&htim3, 75U));
+
+//     /* PB1 / TIM3_CH4: 25% */
+//     __HAL_TIM_SET_COMPARE(&htim3,
+//                           TIM_CHANNEL_4,
+//                           PWM_CompareFromPercent(&htim3, 25U));
+
+//     HAL_Delay(1000);
+// }
+
+}
+/* USER CODE END WHILE */
+
+//==================================================================================================
 /**
   * @brief System Clock Configuration
   * @retval None
