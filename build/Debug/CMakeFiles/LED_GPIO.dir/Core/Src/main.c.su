@@ -1,0 +1,8 @@
+/home/yanjiun68/stm32/Projects/led/LED_GPIO/Core/Src/main.c:72:5:main	8	static
+/home/yanjiun68/stm32/Projects/led/LED_GPIO/Core/Src/main.c:158:6:SystemClock_Config	120	static
+/home/yanjiun68/stm32/Projects/led/LED_GPIO/Core/Src/main.c:209:13:MX_TIM1_Init	96	static
+/home/yanjiun68/stm32/Projects/led/LED_GPIO/Core/Src/main.c:279:13:MX_TIM3_Init	48	static
+/home/yanjiun68/stm32/Projects/led/LED_GPIO/Core/Src/main.c:332:13:MX_TIM4_Init	48	static
+/home/yanjiun68/stm32/Projects/led/LED_GPIO/Core/Src/main.c:385:13:MX_GPIO_Init	40	static
+/home/yanjiun68/stm32/Projects/led/LED_GPIO/Core/Src/main.c:427:6:MPU_Config	24	static
+/home/yanjiun68/stm32/Projects/led/LED_GPIO/Core/Src/main.c:458:6:Error_Handler	4	static
