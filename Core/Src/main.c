@@ -121,12 +121,41 @@ HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
+  
+    //  Turn LEDs ON sequentially : PA0 to PA7
+    // for (uint16_t pin = GPIO_PIN_0; pin <= GPIO_PIN_7; pin <<= 1) 
+    // {
+    //     HAL_GPIO_WritePin(GPIOA, pin, GPIO_PIN_SET);
+    //     HAL_Delay(200);
+    // }
 
-    /* USER CODE BEGIN 3 */
+    // /* Turn LEDs off sequentially: PA0 to PA7 */
+    // for (uint16_t pin = GPIO_PIN_0; pin <= GPIO_PIN_7; pin <<= 1)
+    // {
+    //     HAL_GPIO_WritePin(GPIOA, pin, GPIO_PIN_RESET);
+    //     HAL_Delay(200);
+    // }
+
+    // ### ALTERNATIVE METHOD : TogglePin syntax
+    // for (uint16_t pin = GPIO_PIN_7; pin >= GPIO_PIN_0; pin >>= 1)
+    // {
+    //     HAL_GPIO_TogglePin(GPIOA, pin);
+    //     HAL_Delay(200);
+    // }
+
+    //### SIMULTANEOUS ON AND OFF 
+    // HAL_GPIO_TogglePin(GPIOA, 0x0FF); // 0X0FF : 8'b xxxx xxxx ( 2^8 )
+    // HAL_Delay (50);
+
+    // ==================================================================================
+
+    
+
+
   }
-  /* USER CODE END 3 */
 }
+  /*USER CODE END WHILE*/
+
 
 /**
   * @brief System Clock Configuration
