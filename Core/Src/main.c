@@ -133,8 +133,8 @@ HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 // /* USER CODE END 2 */
 //   /* Infinite loop */
 //   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
+  // while (1)
+  // {
   
 //     //  ### Turn LEDs ON sequentially : PA0 to PA7 ###
 // ==================================================================================
@@ -152,11 +152,23 @@ HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 //     // }
 // ------------===========================-------------------------------------------
     // ### ALTERNATIVE METHOD : TogglePin syntax
-    for (uint16_t pin = GPIO_PIN_7; pin >= GPIO_PIN_0; pin >>= 1)
-    {
-        HAL_GPIO_TogglePin(GPIOA, pin);
-        HAL_Delay(200);
-    }
+    // for (uint16_t pin = GPIO_PIN_7; pin >= GPIO_PIN_0; pin >>= 1)
+    // {
+    //     HAL_GPIO_TogglePin(GPIOA, pin);
+    //     HAL_Delay(500);
+    // }
+
+    // HAL_GPIO_WritePin(GPIOA, 0x0FF, GPIO_PIN_RESET);
+    // HAL_Delay(600);
+
+    // for (uint16_t pin = GPIO_PIN_0; pin <= GPIO_PIN_7; pin <<= 1)
+    // {
+    //     HAL_GPIO_TogglePin(GPIOA, pin);
+    //     HAL_Delay(500);
+    // }
+
+    // HAL_GPIO_WritePin(GPIOA, 0x0FF, GPIO_PIN_RESET);
+    // HAL_Delay(600);
 
 //     //### SIMULTANEOUS ON AND OFF 
     // HAL_GPIO_TogglePin(GPIOA, 0x0FF); // 0X0FF : 8'b xxxx xxxx ( 2^8 )
@@ -168,7 +180,7 @@ HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 
 
 //   }
-}
+// }
 //   /*USER CODE END WHILE*/
 // =======================================================================================
 /* USER CODE BEGIN WHILE */
@@ -201,6 +213,26 @@ HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 
 //     HAL_Delay(1000);
 // }
+
+/* USER CODE BEGIN WHILE */
+while (1){
+  for (int timer = 0U ; timer <= 100U ; timer+=10U){
+
+    /* PB0 / TIM3_CH3 */
+    __HAL_TIM_SET_COMPARE(&htim3,
+                          TIM_CHANNEL_3,
+                          PWM_CompareFromPercent(&htim3, timer));
+
+    /* PB1 / TIM3_CH4 */
+    __HAL_TIM_SET_COMPARE(&htim3,
+                          TIM_CHANNEL_4,
+                          PWM_CompareFromPercent(&htim3, timer));
+
+    HAL_Delay(500);
+  }
+}
+/* USER CODE END WHILE */
+
 
 }
 /* USER CODE END WHILE */
