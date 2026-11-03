@@ -1,6 +1,6 @@
 # STM32H750 LED GPIO and PWM Demo
 
-Author : PEH YAN JIUN 
+# Author : PEH YAN JIUN 
 
 This project is a small STM32 HAL firmware showcase for controlling LEDs with
 GPIO and timer-based PWM. The target configured in CubeMX is an
