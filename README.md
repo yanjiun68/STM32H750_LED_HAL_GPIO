@@ -35,7 +35,8 @@ commented out in `main.c` and do not run unless you select and enable them:
 - **PA0–PA7 group toggle:** toggle all eight outputs together with a 50 ms
   delay.
 - **PB0/PB1 duty-cycle alternation:** alternate between 25%/75% and 75%/25%,
-  holding each pair for one second.
+  holding each pair for one second ( can be configure to change duty cycle to any 
+  desired duty cycle value
 - **PB0/PB1 synchronized PWM ramp:** the active mode, with both channels at the
   same duty cycle.
 
